@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro - Backstage Cena</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-image: url('imagens/background.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            position: relative;
+            padding: 40px 20px;
+        }
+        
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+            z-index: 0;
+        }
+
+        .cadastro-container {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            max-width: 600px;
+        }
+
+        .cadastro-box {
+            background: rgba(0, 0, 0, 0.75);
+            border-radius: 20px;
+            padding: 50px 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .logo-container {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .logo-img {
+            width: 200px;
+            max-width: 100%;
+        }
+
+        .cadastro-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .cadastro-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 32px;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 10px;
+        }
+
+        .cadastro-subtitle {
+            color: #d1d5db;
+            font-size: 15px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            color: #e5e7eb;
+            font-weight: 500;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        .required { color: #f87171; }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 15px 20px;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            font-size: 15px;
+            font-family: 'Inter', sans-serif;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            transition: all 0.3s;
+        }
+
+        textarea { min-height: 80px; resize: vertical; }
+        
+        select { cursor: pointer; }
+        select option { background: #1a1a1a; color: white; }
+
+        input::placeholder, textarea::placeholder { color: rgba(255, 255, 255, 0.5); }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: #8b5cf6;
+            background: rgba(139, 92, 246, 0.1);
+            box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.2);
+        }
+
+        .password-container {
+            position: relative;
+        }
+
+        .password-container input {
+            padding-right: 50px;
+        }
+
+        .toggle-password {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: rgba(255, 255, 255, 0.6);
+            cursor: pointer;
+            font-size: 18px;
+            padding: 8px;
+            width: 35px;
+            height: 35px;
+            border-radius: 5px;
+            transition: all 0.3s;
+        }
+
+        .toggle-password:hover {
+            color: #8b5cf6;
+            background: rgba(139, 92, 246, 0.1);
+        }
+
+        .btn-cadastrar {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 50%, #6d28d9 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 6px 20px rgba(139, 92, 246, 0.4);
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            margin-top: 10px;
+        }
+
+        .btn-cadastrar:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(139, 92, 246, 0.6);
+        }
+
+        .login-link {
+            text-align: center;
+            color: #d1d5db;
+            font-size: 14px;
+            margin-top: 25px;
+        }
+
+        .login-link a {
+            color: #8b5cf6;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .login-link a:hover {
+            text-decoration: underline;
+        }
+
+        .back-home {
+            text-align: center;
+            margin-top: 25px;
+        }
+
+        .back-home a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            font-size: 14px;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .back-home a:hover { color: #8b5cf6; }
+
+        .alert {
+            padding: 15px 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            font-size: 14px;
+            display: none;
+        }
+
+        .alert-error {
+            background: rgba(220, 38, 38, 0.15);
+            border: 1px solid rgba(220, 38, 38, 0.3);
+            color: #fca5a5;
+        }
+
+        @media (max-width: 500px) {
+            .cadastro-box { padding: 40px 25px; }
+            .cadastro-title { font-size: 26px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="cadastro-container">
+        <div class="cadastro-box">
+            <div class="logo-container">
+                <img src="imagens/logo.png" alt="Backstage Cena" class="logo-img" id="logo-img">
+            </div>
+
+            <div class="cadastro-header">
+                <h1 class="cadastro-title">Junte-se ao Backstage!</h1>
+                <p class="cadastro-subtitle">Crie sua conta e conecte-se com músicos</p>
+            </div>
+
+            <div class="alert alert-error" id="alert-error"></div>
+
+            <form action="php/cadastro_process.php" method="POST" id="cadastro-form">
+                <div class="form-group">
+                    <label for="nome_completo">Nome Completo <span class="required">*</span></label>
+                    <input type="text" id="nome_completo" name="nome_completo" placeholder="Seu nome completo" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="nome_artistico">Nome Artístico</label>
+                    <input type="text" id="nome_artistico" name="nome_artistico" placeholder="Como quer ser chamado">
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email <span class="required">*</span></label>
+                    <input type="email" id="email" name="email" placeholder="seu@email.com" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="senha">Senha <span class="required">*</span></label>
+                    <div class="password-container">
+                        <input type="password" id="senha" name="senha" placeholder="Mínimo 8 caracteres" required minlength="8">
+                        <button type="button" class="toggle-password" onclick="togglePassword('senha', this)">
+                            <i class="fa-regular fa-eye"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="confirmar_senha">Confirmar Senha <span class="required">*</span></label>
+                    <div class="password-container">
+                        <input type="password" id="confirmar_senha" name="confirmar_senha" placeholder="Confirme sua senha" required minlength="8">
+                        <button type="button" class="toggle-password" onclick="togglePassword('confirmar_senha', this)">
+                            <i class="fa-regular fa-eye"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="telefone">Telefone</label>
+                    <input type="tel" id="telefone" name="telefone" placeholder="(00) 00000-0000">
+                </div>
+
+                <div class="form-group">
+                    <label for="cidade">Cidade <span class="required">*</span></label>
+                    <input type="text" id="cidade" name="cidade" placeholder="Sua cidade" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="estado">Estado <span class="required">*</span></label>
+                    <select id="estado" name="estado" required>
+                        <option value="">Selecione...</option>
+                        <option value="AC">Acre</option>
+                        <option value="AL">Alagoas</option>
+                        <option value="BA">Bahia</option>
+                        <option value="CE">Ceará</option>
+                        <option value="DF">Distrito Federal</option>
+                        <option value="ES">Espírito Santo</option>
+                        <option value="MG">Minas Gerais</option>
+                        <option value="PA">Pará</option>
+                        <option value="PB">Paraíba</option>
+                        <option value="PE">Pernambuco</option>
+                        <option value="PI">Piauí</option>
+                        <option value="PR">Paraná</option>
+                        <option value="RJ">Rio de Janeiro</option>
+                        <option value="RN">Rio Grande do Norte</option>
+                        <option value="RS">Rio Grande do Sul</option>
+                        <option value="SC">Santa Catarina</option>
+                        <option value="SP">São Paulo</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="area_atuacao">Área de Atuação <span class="required">*</span></label>
+                    <select id="area_atuacao" name="area_atuacao" required>
+                        <option value="">Selecione...</option>
+                        <option value="Vocalista">Vocalista</option>
+                        <option value="Instrumentista">Instrumentista</option>
+                        <option value="Produtor">Produtor Musical</option>
+                        <option value="Compositor">Compositor</option>
+                        <option value="DJ">DJ</option>
+                        <option value="Beatmaker">Beatmaker</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="biografia">Sobre Você</label>
+                    <textarea id="biografia" name="biografia" placeholder="Conte um pouco sobre sua jornada musical..."></textarea>
+                </div>
+
+                <button type="submit" class="btn-cadastrar">
+                    <i class="fa-solid fa-check"></i>
+                    Cadastrar
+                </button>
+            </form>
+
+            <div class="login-link">
+                Já tem uma conta? <a href="login.html">Faça login aqui</a>
+            </div>
+        </div>
+
+        <div class="back-home">
+            <a href="index.html">
+                <i class="fa-solid fa-arrow-left"></i>
+                Voltar para página inicial
+            </a>
+        </div>
+    </div>
+
+    <script>
+        function togglePassword(inputId, button) {
+            const input = document.getElementById(inputId);
+            const icon = button.querySelector('i');
+            
+            if (input.type === 'password') {
+                input.type = 'text';
+                icon.classList.remove('fa-eye');
+                icon.classList.add('fa-eye-slash');
+            } else {
+                input.type = 'password';
+                icon.classList.remove('fa-eye-slash');
+                icon.classList.add('fa-eye');
+            }
+        }
+
+        document.getElementById('cadastro-form').addEventListener('submit', function(e) {
+            const senha = document.getElementById('senha').value;
+            const confirmar = document.getElementById('confirmar_senha').value;
+            
+            if (senha !== confirmar) {
+                e.preventDefault();
+                mostrarErro('As senhas não coincidem!');
+                return false;
+            }
+        });
+
+        function mostrarErro(mensagem) {
+            const alert = document.getElementById('alert-error');
+            alert.textContent = mensagem;
+            alert.style.display = 'block';
+            setTimeout(() => alert.style.display = 'none', 5000);
+        }
+
+        window.addEventListener('load', function() {
+            const logoImg = document.getElementById('logo-img');
+            logoImg.onerror = function() {
+                this.style.display = 'none';
+                const fallback = document.createElement('div');
+                fallback.style.cssText = 'font-family: Poppins; font-size: 28px; font-weight: 700; color: #8b5cf6;';
+                fallback.textContent = 'BACKSTAGE CENA';
+                document.querySelector('.logo-container').appendChild(fallback);
+            };
+        });
+    </script>
+</body>
+</html>
