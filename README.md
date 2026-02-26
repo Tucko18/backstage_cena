@@ -45,7 +45,7 @@ The system focuses on clarity and correctness, prioritizing functional implement
 ## Technologies used
 - HTML  
 - CSS  
-- JavaScript  
+- PHP  
 - SQL (relational database)  
 - Git and GitHub for version control  
 
